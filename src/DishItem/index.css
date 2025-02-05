@@ -1,0 +1,151 @@
+.card {
+  width: 100%;
+  display: flex;
+  box-shadow: 0px 1px 2px 0px;
+  border-radius: 3px;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+  height: 250px;
+  padding: 10px;
+}
+.dish-text {
+  display: flex;
+  flex-direction: column;
+  align-self: flex-start;
+}
+.dishdetails {
+  display: flex;
+  margin: 0px;
+  align-self: flex-start;
+}
+.logo-container-veg {
+  border: 1px solid green;
+  padding: 3px;
+  align-self: flex-start;
+  margin-right: 5px;
+}
+.veg-logo {
+  background-color: green;
+  border-radius: 100%;
+  padding: 5px;
+}
+.logo-container-nonveg {
+  border: 1px solid brown;
+  padding: 3px;
+  align-self: flex-start;
+  margin-right: 5px;
+}
+.nonveg-logo {
+  background-color: brown;
+  border-radius: 100%;
+  padding: 5px;
+}
+.dish-name {
+  font-family: Roboto;
+  font-size: 20px;
+  font-weight: bold;
+  margin: 0px;
+}
+.currency {
+  font-family: Roboto;
+  font-size: 15px;
+  font-weight: 500;
+}
+.buttons {
+  background-color: green;
+  border: none;
+  border-radius: 30px;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 150px;
+  height: 50px;
+  margin: 0px;
+}
+.btn {
+  cursor: pointer;
+  color: white;
+  font-size: 25px;
+  border: none;
+  background-color: transparent;
+}
+.quantity {
+  color: white;
+  font-size: 25px;
+}
+.calories {
+  font-family: Roboto;
+  font-size: 20px;
+  color: orange;
+  font-weight: bold;
+}
+.description {
+  font-size: 20px;
+  color: grey;
+}
+.image {
+  width: 180px;
+  height: 180px;
+  margin: 0px;
+}
+.not-available {
+  color: red;
+  font-family: Roboto;
+  font-size: 20px;
+}
+.custom-available {
+  color: blue;
+  font-family: Roboto;
+  font-size: 20px;
+}
+.dish-type {
+  border: 1px solid green;
+  border-radius: 100%;
+  width: 25px;
+}
+
+@media (max-width: 768px) {
+  .card {
+    padding: 10px;
+    height: 200px;
+  }
+  .dishdetails {
+    width: 80%;
+  }
+  .dish-name {
+    font-size: 12px;
+  }
+  .currency {
+    font-size: 10px;
+  }
+  .buttons {
+    width: 80px;
+    height: 30px;
+  }
+  .btn {
+    font-size: 20px;
+  }
+  .quantity {
+    font-size: 15px;
+  }
+  .calories {
+    font-size: 10px;
+  }
+  .image {
+    width: 80px;
+    height: 80px;
+    align-self: flex-start;
+  }
+  .description {
+    font-size: 12px;
+    margin-top: 0px;
+  }
+  .not-available {
+    font-size: 12px;
+  }
+  .custom-available {
+    font-size: 12px;
+  }
+}

@@ -1,0 +1,38 @@
+.list-item {
+  font-family: roboto;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+  white-space: nowrap;
+  list-style-type: none;
+  background-color: transparent;
+  border: none;
+  outline: none;
+  width: 200px;
+}
+.active-color {
+  color: brown;
+  font-family: roboto;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+  border-bottom: 2px solid brown;
+  list-style-type: none;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  background-color: transparent;
+  outline: none;
+  white-space: nowrap;
+  width: 200px;
+}
+@media (max-width: 768px) {
+  .list-item {
+    font-size: 12px;
+    width: 50%;
+  }
+  .active-color {
+    font-size: 12px;
+    width: 50%;
+  }
+}
