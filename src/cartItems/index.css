@@ -1,0 +1,82 @@
+.cart-card {
+  display: flex;
+  align-items: center;
+  box-shadow: 1px 2px 4px 0px;
+  padding: 10px;
+  height: 150px;
+  width: 70%;
+  justify-content: space-between;
+  border-radius: 10px;
+  margin-top: 10px;
+}
+.price-quantity {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.dish-name {
+  font-family: Roboto;
+  font-size: 20px;
+}
+.cart-dishimage {
+  width: 100px;
+}
+.dish-price {
+  font-family: Roboto;
+  font-size: 20px;
+  font-weight: 600;
+  margin: 0px;
+}
+.quantity-controls {
+  display: flex;
+  align-items: center;
+  background-color: green;
+  border: none;
+  border-radius: 15px;
+  outline: none;
+  color: white;
+  margin-top: 10px;
+}
+.btns {
+  font-family: roboto;
+  font-size: 35px;
+  cursor: pointer;
+  border: none;
+  background-color: transparent;
+  outline: none;
+  color: white;
+}
+.remove-btn {
+  border: none;
+  font-family: roboto;
+  color: white;
+  outline: none;
+  padding: 5px;
+  border-radius: 5px;
+  background-color: blue;
+  cursor: pointer;
+  margin-top: 10px;
+}
+@media (max-width: 768px) {
+  .cart-card {
+    height: 200px;
+    flex-direction: column;
+  }
+  .dish-name {
+    font-size: 20px;
+  }
+  .cart-dishimage {
+    width: 50px;
+    align-self: flex-end;
+  }
+  .dish-price {
+    font-size: 12px;
+  }
+  .btns {
+    font-size: 20px;
+    margin: none;
+  }
+  .remove-btn {
+    font-size: 10px;
+  }
+}

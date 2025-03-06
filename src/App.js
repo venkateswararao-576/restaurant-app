@@ -1,19 +1,18 @@
+import {Route, BrowserRouter, Switch, Redirect} from 'react-router-dom'
 import {Component} from 'react'
 
-import Header from './header'
-
-import Categories from './categoryMenu'
-
-import DishItem from './DishItem'
-
-import './App.css'
+import Login from './Login'
+import Home from './HomeRoute'
+import Cart from './cart'
+import CartContext from './CartContext'
 
 class App extends Component {
   state = {
+    dishes: '',
+    cartitems: [],
     menuslist: '',
     activemenufooditems: [],
     activecategory: '',
-    cartcount: 0,
     isloading: true,
   }
 
@@ -71,14 +70,10 @@ class App extends Component {
     )
     const refilter = filterfoodlist.filter(each => each.length > 0)
     this.setState({
-      activemenufooditems: refilter,
+      activemenufooditems: refilter[0],
       isloading: false,
     })
   }
-
-  increasecart = () => this.setState(prev => ({cartcount: prev.cartcount + 1}))
-
-  decreasecart = () => this.setState(prev => ({cartcount: prev.cartcount - 1}))
 
   changeCategory = category =>
     this.setState({activecategory: category}, this.activefooditems)
@@ -109,43 +104,120 @@ class App extends Component {
     this.setState({dishes: filterlist}, this.activefooditems)
   }
 
+  addCartItem = details => {
+    const {cartitems} = this.state
+    if (cartitems.length === 0) {
+      this.setState(prev => ({
+        cartitems: [...prev.cartitems, details],
+      }))
+    } else {
+      const isincart = cartitems.filter(each => each.dishId === details.dishId)
+      if (isincart.length === 0) {
+        this.setState(prev => ({
+          cartitems: [...prev.cartitems, details],
+        }))
+      } else {
+        const updatequantity = cartitems.map(each => {
+          if (each.dishId === details.dishId) {
+            return {...each, quantity: each.quantity + details.quantity}
+          }
+          return each
+        })
+        this.setState({cartitems: updatequantity})
+      }
+    }
+  }
+
+  removeItem = id => {
+    const {cartitems} = this.state
+    const filtercartitems = cartitems.filter(each => each.dishId !== id)
+    this.setState({cartitems: filtercartitems})
+  }
+
+  removeAllCartItems = () => this.setState({cartitems: []})
+
+  incrementCartItemQuantity = id => {
+    const {cartitems} = this.state
+    const filteritems = cartitems.map(each => {
+      if (each.dishId === id) {
+        return {
+          ...each,
+          quantity: each.quantity + 1,
+        }
+      }
+      return each
+    })
+    this.setState({cartitems: filteritems})
+  }
+
+  decrementCartItemQuantity = id => {
+    const {cartitems} = this.state
+    let isremove = false
+    const filtercartitems = cartitems.map(each => {
+      if (each.dishId === id) {
+        if (each.quantity === 1) {
+          isremove = true
+        } else {
+          return {...each, quantity: each.quantity - 1}
+        }
+      }
+      return each
+    })
+    if (isremove) {
+      const removeitemlist = cartitems.filter(each => each.dishId !== id)
+      this.setState({cartitems: removeitemlist})
+    } else {
+      this.setState({cartitems: filtercartitems})
+    }
+  }
+
   render() {
     const {
       activemenufooditems,
-      menuslist,
       activecategory,
-      cartcount,
+      menuslist,
       isloading,
+      cartitems,
     } = this.state
+    let totalcartval = 0
+    const total = cartitems.map(each => {
+      totalcartval += each.dishPrice * each.quantity
+
+      return totalcartval
+    })
+
     return (
       <>
         {isloading ? (
           ''
         ) : (
-          <>
-            <Header count={cartcount} />
-            <div className="category-list">
-              {menuslist.map(each => (
-                <Categories
-                  menuname={each.category}
-                  key={each.id}
-                  active={activecategory}
-                  changeCategory={this.changeCategory}
-                />
-              ))}
-            </div>
-            <ul className="dishes">
-              {activemenufooditems[0].map(each => (
-                <DishItem
-                  details={each}
-                  addtocart={this.increasecart}
-                  removecart={this.decreasecart}
-                  addquantity={this.addquantity}
-                  reducequantity={this.reducequantity}
-                />
-              ))}
-            </ul>
-          </>
+          <CartContext.Provider
+            value={{
+              activeitems: activemenufooditems,
+              addCartItem: this.addCartItem,
+              activecategory,
+              changecategory: this.changeCategory,
+              categorylist: menuslist,
+              cartcount: cartitems.length,
+              increasequantity: this.addquantity,
+              decreasequantity: this.reducequantity,
+              cartList: cartitems,
+              removeCartItem: this.removeItem,
+              removeAllCartItems: this.removeAllCartItems,
+              incrementCartItemQuantity: this.incrementCartItemQuantity,
+              decrementCartItemQuantity: this.decrementCartItemQuantity,
+              totalPrice: totalcartval,
+            }}
+          >
+            <BrowserRouter>
+              <Switch>
+                <Route exact path="/login" component={Login} />
+                <Route exact path="/" component={Home} />
+                <Route exact path="/cart" component={Cart} />
+                <Redirect to="login" />
+              </Switch>
+            </BrowserRouter>
+          </CartContext.Provider>
         )}
       </>
     )

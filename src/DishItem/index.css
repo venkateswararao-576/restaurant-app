@@ -6,7 +6,7 @@
   justify-content: space-between;
   align-items: center;
   margin-bottom: 10px;
-  height: 250px;
+  height: 300px;
   padding: 10px;
 }
 .dish-text {
@@ -52,11 +52,14 @@
   font-size: 15px;
   font-weight: 500;
 }
+.btn-addcart {
+  display: flex;
+  flex-direction: column;
+}
 .buttons {
   background-color: green;
   border: none;
   border-radius: 30px;
-  padding: 10px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -90,6 +93,20 @@
   height: 180px;
   margin: 0px;
 }
+.add-cart-btn {
+  font-family: Roboto;
+  font-size: 15px;
+  color: white;
+  border: none;
+  outline: none;
+  border-radius: 5px;
+  background-color: blue;
+  padding: 10px;
+  align-self: flex-start;
+  font-weight: 500;
+  margin-top: 10px;
+  cursor: pointer;
+}
 .not-available {
   color: red;
   font-family: Roboto;
@@ -108,8 +125,8 @@
 
 @media (max-width: 768px) {
   .card {
-    padding: 10px;
-    height: 200px;
+    height: 220px;
+    width: 100%;
   }
   .dishdetails {
     width: 80%;
@@ -119,6 +136,15 @@
   }
   .currency {
     font-size: 10px;
+  }
+  .btn-addcart {
+    flex-direction: row;
+    align-items: center;
+  }
+  .add-cart-btn {
+    padding: 5px;
+    font-size: 7px;
+    margin-left: 10px;
   }
   .buttons {
     width: 80px;

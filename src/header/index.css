@@ -1,16 +1,37 @@
 .nav-header {
   display: flex;
-  width: 100%;
   box-shadow: 0px 1px 3px 0px;
   align-items: center;
   justify-content: space-between;
   padding: 10px 15px;
+  width: 100%;
 }
 .heading {
   font-family: Roboto;
   font-weight: bold;
   font-size: 30px;
   margin: 0px;
+  cursor: pointer;
+}
+.cart-btn {
+  background-color: transparent;
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+.log-out-btn {
+  border: none;
+  background-color: blue;
+  border-radius: 5px;
+  outline: none;
+  padding: 5px 10px;
+  color: white;
+  font-family: Roboto;
+  font-size: 15px;
+  margin-left: 10px;
+  align-self: flex-end;
+  cursor: pointer;
+  font-weight: 500;
 }
 .order-cart {
   display: flex;
@@ -25,6 +46,7 @@
 .cart {
   font-size: 50px;
   margin: none;
+  cursor: pointer;
 }
 .cart-items {
   background-color: orange;
@@ -62,5 +84,9 @@
   .cart-badge {
     width: 40px;
     height: 30px;
+  }
+  .log-out-btn {
+    font-size: 10px;
+    padding: 5px;
   }
 }
