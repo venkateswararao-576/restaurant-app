@@ -15,5 +15,6 @@ const CartContext = React.createContext({
   incrementCartItemQuantity: () => {},
   removeAll: () => {},
   totalPrice: 0,
+  restaurantName: '',
 })
 export default CartContext

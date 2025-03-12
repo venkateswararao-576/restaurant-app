@@ -15,12 +15,12 @@ const Header = props => {
   return (
     <CartContext.Consumer>
       {value => {
-        const {cartcount} = value
+        const {cartcount, restaurantName} = value
 
         return (
           <nav className="nav-header">
             <Link to="/">
-              <h1 className="heading">UNI Resto Cafe</h1>
+              <h1 className="heading">{restaurantName}</h1>
             </Link>
             <div className="order-cart">
               <p className="order">My Orders</p>

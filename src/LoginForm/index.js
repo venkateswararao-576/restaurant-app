@@ -4,22 +4,22 @@ import Cookies from 'js-cookie'
 
 import './index.css'
 
-class Login extends Component {
+class LoginForm extends Component {
   state = {username: '', password: '', iserror: false, errmsg: ''}
 
   changeusername = event => this.setState({username: event.target.value})
 
   changepassword = event => this.setState({password: event.target.value})
 
-  onsuccess = jwtToken => {
+  issuccess = jwtToken => {
     const {history} = this.props
-    Cookies.set('jwt_token', jwtToken, {expires: 30, path: '/'})
+    Cookies.set('jwt_token', jwtToken, {expires: 30})
     history.replace('/')
   }
 
-  onfailure = errmsg => this.setState({iserror: true, errmsg})
+  isfailure = errmsg => this.setState({iserror: true, errmsg})
 
-  submitvalues = async event => {
+  submituservalues = async event => {
     event.preventDefault()
     const {username, password} = this.state
     const url = 'https://apis.ccbp.in/login'
@@ -30,10 +30,10 @@ class Login extends Component {
     }
     const response = await fetch(url, options)
     const data = await response.json()
-    if (response.ok === true) {
-      this.onsuccess(data.jwt_token)
+    if (response.ok) {
+      this.issuccess(data.jwt_token)
     } else {
-      this.onfailure(data.error_msg)
+      this.isfailure(data.error_msg)
     }
   }
 
@@ -44,8 +44,8 @@ class Login extends Component {
       return <Redirect to="/" />
     }
     return (
-      <div className="logincontainer">
-        <form className="login-card" onSubmit={this.submitvalues}>
+      <div className="login-container">
+        <form className="login-card" onSubmit={this.submituservalues}>
           <label className="label" htmlFor="name">
             USERNAME
           </label>
@@ -75,4 +75,4 @@ class Login extends Component {
     )
   }
 }
-export default Login
+export default LoginForm

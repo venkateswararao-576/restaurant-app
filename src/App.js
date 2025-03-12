@@ -1,7 +1,7 @@
 import {Route, BrowserRouter, Switch, Redirect} from 'react-router-dom'
 import {Component} from 'react'
 
-import Login from './Login'
+import LoginForm from './LoginForm'
 import Home from './HomeRoute'
 import Cart from './cart'
 import CartContext from './CartContext'
@@ -14,6 +14,7 @@ class App extends Component {
     activemenufooditems: [],
     activecategory: '',
     isloading: true,
+    restaurantName: '',
   }
 
   componentDidMount() {
@@ -30,6 +31,7 @@ class App extends Component {
       id: each.menu_category_id,
       category: each.menu_category,
     }))
+    const name = response[0].restaurant_name
 
     const fooditems = dishlist.map(every =>
       every.category_dishes.map(each => ({
@@ -53,6 +55,7 @@ class App extends Component {
         dishes: fooditems,
         menuslist: menus,
         activecategory: menus[0].category,
+        restaurantName: name,
       },
       this.activefooditems,
     )
@@ -178,6 +181,7 @@ class App extends Component {
       menuslist,
       isloading,
       cartitems,
+      restaurantName,
     } = this.state
     let totalcartval = 0
     const total = cartitems.map(each => {
@@ -207,11 +211,12 @@ class App extends Component {
               incrementCartItemQuantity: this.incrementCartItemQuantity,
               decrementCartItemQuantity: this.decrementCartItemQuantity,
               totalPrice: totalcartval,
+              restaurantName,
             }}
           >
             <BrowserRouter>
               <Switch>
-                <Route exact path="/login" component={Login} />
+                <Route exact path="/login" component={LoginForm} />
                 <Route exact path="/" component={Home} />
                 <Route exact path="/cart" component={Cart} />
                 <Redirect to="login" />
