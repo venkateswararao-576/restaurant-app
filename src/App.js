@@ -1,10 +1,12 @@
 import {Route, BrowserRouter, Switch, Redirect} from 'react-router-dom'
+import Loader from 'react-loader-spinner'
 import {Component} from 'react'
 
 import LoginForm from './LoginForm'
 import Home from './HomeRoute'
 import Cart from './cart'
 import CartContext from './CartContext'
+import './App.css'
 
 class App extends Component {
   state = {
@@ -191,40 +193,56 @@ class App extends Component {
     })
 
     return (
-      <>
-        {isloading ? (
-          ''
-        ) : (
-          <CartContext.Provider
-            value={{
-              activeitems: activemenufooditems,
-              addCartItem: this.addCartItem,
-              activecategory,
-              changecategory: this.changeCategory,
-              categorylist: menuslist,
-              cartcount: cartitems.length,
-              increasequantity: this.addquantity,
-              decreasequantity: this.reducequantity,
-              cartList: cartitems,
-              removeCartItem: this.removeItem,
-              removeAllCartItems: this.removeAllCartItems,
-              incrementCartItemQuantity: this.incrementCartItemQuantity,
-              decrementCartItemQuantity: this.decrementCartItemQuantity,
-              totalPrice: totalcartval,
-              restaurantName,
-            }}
-          >
-            <BrowserRouter>
-              <Switch>
-                <Route exact path="/login" component={LoginForm} />
+      <div className="app-container">
+        <CartContext.Provider
+          value={{
+            activeitems: activemenufooditems,
+            addCartItem: this.addCartItem,
+            activecategory,
+            changecategory: this.changeCategory,
+            categorylist: menuslist,
+            cartcount: cartitems.length,
+            increasequantity: this.addquantity,
+            decreasequantity: this.reducequantity,
+            cartList: cartitems,
+            removeCartItem: this.removeItem,
+            removeAllCartItems: this.removeAllCartItems,
+            incrementCartItemQuantity: this.incrementCartItemQuantity,
+            decrementCartItemQuantity: this.decrementCartItemQuantity,
+            totalPrice: totalcartval,
+            restaurantName,
+          }}
+        >
+          <BrowserRouter>
+            <Switch>
+              <Route exact path="/login" component={LoginForm} />
+              {isloading ? (
+                <Loader
+                  className="loader"
+                  width={50}
+                  height={50}
+                  color="blue"
+                  type="ThreeDots"
+                />
+              ) : (
                 <Route exact path="/" component={Home} />
+              )}
+              {isloading ? (
+                <Loader
+                  className="loader"
+                  width={50}
+                  height={50}
+                  color="blue"
+                  type="ThreeDots"
+                />
+              ) : (
                 <Route exact path="/cart" component={Cart} />
-                <Redirect to="login" />
-              </Switch>
-            </BrowserRouter>
-          </CartContext.Provider>
-        )}
-      </>
+              )}
+              <Redirect to="/login" />
+            </Switch>
+          </BrowserRouter>
+        </CartContext.Provider>
+      </div>
     )
   }
 }

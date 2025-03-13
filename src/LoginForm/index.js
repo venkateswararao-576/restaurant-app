@@ -46,24 +46,24 @@ class LoginForm extends Component {
     return (
       <div className="login-container">
         <form className="login-card" onSubmit={this.submituservalues}>
-          <label className="label" htmlFor="name">
+          <label className="label" htmlFor="username">
             USERNAME
           </label>
           <input
             onChange={this.changeusername}
             value={username}
             type="text"
-            id="name"
+            id="username"
             placeholder="Username"
           />
-          <label className="label" htmlFor="pass">
+          <label className="label" htmlFor="password">
             PASSWORD
           </label>
           <input
             onChange={this.changepassword}
             value={password}
             type="password"
-            id="pass"
+            id="password"
             placeholder="Password"
           />
           <button type="submit" className="login-btn">
